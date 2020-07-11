@@ -75,11 +75,11 @@ if is_admin():
                 [sg.Button('Start'), sg.Button('Stop'), sg.Button('Exit')] ]
 
     # Create the Window
-    window = sg.Window('ML Disabler', layout, size=(210,100))
+    window = sg.Window('Mystic Light Disabler', layout, size=(210,100))
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
-        if event == sg.WIN_CLOSED or event == 'Exit': # if user closes window or clicks cancel
+        if event == 'Exit': # if user closes window or clicks cancel
             break
         elif event == 'Start':
             start_ml()

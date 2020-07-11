@@ -79,7 +79,7 @@ if is_admin():
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
-        if event == sg.WIN_CLOSED or event == 'Exit': # if user closes window or clicks cancel
+        if event == 'Exit': # if user closes window or clicks cancel
             break
         elif event == 'Start':
             start_ml()

@@ -39,7 +39,10 @@ if is_admin():
 
     def Service_Query():
         ml_service_query = win32serviceutil.QueryServiceStatus('MysticLight2_Service')
+
         print(ml_service_query)
+
+
         if ml_service_query[2] == 0:
             return("Stopped")
         else:
@@ -48,47 +51,44 @@ if is_admin():
 
     def Process_Query():
         ml_process_query = process_exists("LEDKeeper.exe")
+
         if ml_process_query == True:
             return("Running")
         else:
             return("Stopped")
 
-    """
-    def Update_Query():
-        try:
-            if Process_Query() and Service_Query() == "Running":
-                while Process_Query() and Service_Query() == "Running":
-                    window["TPQ"].update(Process_Query())
-                    window["TSQ"].update(Service_Query())
-        except:
-            if Process_Query() and Service_Query() == "Stopped":
-                while Process_Query() and Service_Query() == "Stopped":
-                    window["TPQ"].update(Process_Query())
-                    window["TSQ"].update(Service_Query())
-    """
+
+def Update_Query():
+    if Process_Query() and Service_Query() == "Running":
+        while Process_Query() and Service_Query() == "Running":
+            window["TPQ"].update(Process_Query())
+            window["TSQ"].update(Service_Query())
+    elif Process_Query() and Service_Query() == "Stopped":
+        while Process_Query() and Service_Query() == "Stopped":
+            window["TPQ"].update(Process_Query())
+            window["TSQ"].update(Service_Query())
+
 
 
     sg.theme("Black")
 
     layout = [  [sg.Text('Process Status:'), sg.Text(Process_Query(), key="TPQ")],
                 [sg.Text('Service Status:'), sg.Text(Service_Query(), key="TSQ")],
-                [sg.Button('Start'), sg.Button('Stop'), sg.Button('Exit')] ]
+                [sg.Button('Start'), sg.Button('Stop'), sg.Button('Cancel')] ]
 
     # Create the Window
-    window = sg.Window('ML Disabler', layout, size=(210,100))
+    window = sg.Window('Mystic Light Disabler', layout, size=(240,100))
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
-        if event == sg.WIN_CLOSED or event == 'Exit': # if user closes window or clicks cancel
+        if event == 'Cancel': # if user closes window or clicks cancel
             break
         elif event == 'Start':
             start_ml()
-            window["TPQ"].update("Running")
-            window["TSQ"].update("Running")
+            Update_Query()
         elif event == 'Stop':
             stop_ml()
-            window["TPQ"].update("Stopped")
-            window["TSQ"].update("Stopped")
+            Update_Query()
 
     window.close()
 
