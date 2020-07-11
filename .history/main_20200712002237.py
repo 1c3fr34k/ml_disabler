@@ -51,8 +51,8 @@ def Process_Query():
 
 sg.theme("Black")
 
-layout = [  [sg.Text('Process Status:'), sg.Text(Process_Query())],
-            [sg.Text('Service Status:'), sg.Text(Service_Query())],
+layout = [  [sg.Text('Process Status:'), sg.Text('Running')],
+            [sg.Text('Service Status:'), sg.Text('Running')],
             [sg.Button('Start'), sg.Button('Stop'), sg.Button('Cancel')] ]
 
 # Create the Window

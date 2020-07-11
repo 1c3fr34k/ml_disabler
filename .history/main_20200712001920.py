@@ -34,25 +34,21 @@ def Service_Query():
 
 
     if ml_service_query[2] == 0:
-        return("Stopped")
+        print("stopped")
+        return("stopped")
     else:
-        return("Running")
+        print("running")
+        return("running")
 
 
 def Process_Query():
-    ml_process_query = process_exists("LEDKeeper.exe")
-
-    if ml_process_query == True:
-        return("Running")
-    else:
-        return("Stopped")
-
+    
 
 
 sg.theme("Black")
 
-layout = [  [sg.Text('Process Status:'), sg.Text(Process_Query())],
-            [sg.Text('Service Status:'), sg.Text(Service_Query())],
+layout = [  [sg.Text('Process Status:'), sg.Text('Running')],
+            [sg.Text('Service Status:'), sg.Text('Running')],
             [sg.Button('Start'), sg.Button('Stop'), sg.Button('Cancel')] ]
 
 # Create the Window
